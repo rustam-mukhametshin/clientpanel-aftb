@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Client} from '../../models/Client';
 
 @Component({
   selector: 'app-add-client',
@@ -7,7 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddClientComponent implements OnInit {
 
-  constructor() { }
+  client: Client = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    balance: 0
+  };
+
+  disableBalanceOnAdd = true;
+  @ViewChild('clientForm', {static: false}) form: any;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
