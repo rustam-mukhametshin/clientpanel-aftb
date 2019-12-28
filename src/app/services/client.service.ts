@@ -33,4 +33,12 @@ export class ClientService {
     );
     return this.clients;
   }
+
+  /**
+   * Adding new client to Firestore panel.
+   * @param client
+   */
+  newClient(client: Client) {
+    this.clientsCollection.add(client);
+  }
 }
