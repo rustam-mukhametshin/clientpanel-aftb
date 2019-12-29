@@ -62,4 +62,13 @@ export class ClientService {
 
     return this.client;
   }
+
+  /**
+   * Updating client by id in Firestore panel.
+   * @param client
+   */
+  updateClient(client: Client) {
+    this.clientDoc = this.afs.doc(`clients/${client.id}`);
+    this.clientDoc.update(client);
+  }
 }

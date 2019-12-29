@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ClientService} from '../../services/client.service';
 import {Client} from '../../models/Client';
 import {ActivatedRoute} from '@angular/router';
+import {FlashMessagesService} from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-client-details',
@@ -18,10 +19,12 @@ export class ClientDetailsComponent implements OnInit {
     balance: 0
   };
   hasBalance = false;
+  showBalanceUpdateInput = false;
 
   constructor(
     private clientService: ClientService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private flashMessage: FlashMessagesService
   ) {
   }
 
@@ -35,6 +38,17 @@ export class ClientDetailsComponent implements OnInit {
         }
       }
       this.client = client;
+    });
+  }
+
+  /**
+   * Update client balance.
+   */
+  updateBalance() {
+    this.clientService.updateClient(this.client);
+    this.flashMessage.show('Balance updated', {
+      cssClass: 'alert-success',
+      timeOut: 4000
     });
   }
 }
