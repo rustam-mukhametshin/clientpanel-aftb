@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/firestore';
+import {Observable} from 'rxjs';
 import {Client} from '../models/Client';
 import {map} from 'rxjs/operators';
 
@@ -40,5 +40,26 @@ export class ClientService {
    */
   newClient(client: Client) {
     this.clientsCollection.add(client);
+  }
+
+  /**
+   * Getting client by id from Firestore panel.
+   * @param id
+   */
+  getClient(id: string): Observable<Client> {
+    this.clientDoc = this.afs.doc<Client>(`clients/${id}`);
+    this.client = this.clientDoc.snapshotChanges().pipe(
+      map(action => {
+        if (action.payload.exists === false) {
+          return null;
+        } else {
+          const data = action.payload.data() as Client;
+          data.id = action.payload.id;
+          return data;
+        }
+      })
+    );
+
+    return this.client;
   }
 }
