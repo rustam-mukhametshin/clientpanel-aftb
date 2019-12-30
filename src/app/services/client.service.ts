@@ -14,12 +14,14 @@ export class ClientService {
   clients: Observable<Client[]>;
   client: Observable<Client>;
 
-  constructor(private afs: AngularFirestore) {
+  constructor(
+    private afs: AngularFirestore
+  ) {
     this.clientsCollection = this.afs.collection('clients', ref => ref.orderBy('lastName', 'asc'));
   }
 
   /**
-   * Getting clients from Firestore panel.
+   * Get clients from Firestore panel.
    */
   getClients(): Observable<Client[]> {
     // Get clients with the id
@@ -35,7 +37,7 @@ export class ClientService {
   }
 
   /**
-   * Adding new client to Firestore panel.
+   * Add new client to Firestore panel.
    * @param client
    */
   newClient(client: Client) {
@@ -43,7 +45,7 @@ export class ClientService {
   }
 
   /**
-   * Getting client by id from Firestore panel.
+   * Get client by id from Firestore panel.
    * @param id
    */
   getClient(id: string): Observable<Client> {
@@ -64,11 +66,20 @@ export class ClientService {
   }
 
   /**
-   * Updating client by id in Firestore panel.
+   * Update client by id in Firestore panel.
    * @param client
    */
   updateClient(client: Client) {
     this.clientDoc = this.afs.doc(`clients/${client.id}`);
     this.clientDoc.update(client);
+  }
+
+  /**
+   * Delete client by id in Firestore panel.
+   * @param client
+   */
+  deleteClient(client: Client) {
+    this.clientDoc = this.afs.doc(`clients/${client.id}`);
+    this.clientDoc.delete();
   }
 }
