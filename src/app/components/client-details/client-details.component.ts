@@ -31,6 +31,7 @@ export class ClientDetailsComponent implements OnInit {
   ngOnInit() {
     // Get id from url
     this.id = this.activatedRoute.snapshot.params.id;
+    // Get client
     this.clientService.getClient(this.id).subscribe(client => {
       if (client !== null) {
         if (client.balance > 0) {
