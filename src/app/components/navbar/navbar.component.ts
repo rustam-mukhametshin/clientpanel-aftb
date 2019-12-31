@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import {AuthService} from '../../services/auth.service';
 import {AngularFireAuth} from '@angular/fire/auth';
+import {SettingsService} from '../../services/settings.service';
 
 @Component({
   selector: 'app-navbar',
@@ -19,7 +20,8 @@ export class NavbarComponent implements OnInit {
     private authService: AuthService,
     private afAuth: AngularFireAuth,
     private router: Router,
-    private flashMessage: FlashMessagesService
+    private flashMessage: FlashMessagesService,
+    private settingsService: SettingsService
   ) {
   }
 
@@ -31,6 +33,8 @@ export class NavbarComponent implements OnInit {
       } else {
         this.isLoggedIn = false;
       }
+
+      this.showRegister = this.settingsService.getSettings().allowRegistration;
     });
   }
 
