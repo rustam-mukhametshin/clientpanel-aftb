@@ -24,4 +24,11 @@ export class SettingsComponent implements OnInit {
     this.settings = this.settingsService.getSettings();
   }
 
+  onSubmit() {
+    this.settingsService.changeSettings(this.settings);
+    this.flashMessage.show('Settings saved', {
+      cssClass: 'alert-success', timeout: 4000
+    });
+  }
+
 }
