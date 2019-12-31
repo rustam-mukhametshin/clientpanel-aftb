@@ -11,5 +11,10 @@ export class SettingsService {
     disableBalanceOnEdit: false
   };
 
-  constructor() { }
+  constructor() {
+  }
+
+  getSettings(): Settings {
+    return this.settings;
+  }
 }
