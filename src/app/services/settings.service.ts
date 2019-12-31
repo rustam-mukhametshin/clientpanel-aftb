@@ -23,5 +23,6 @@ export class SettingsService {
 
   changeSettings(settings): Settings {
     localStorage.setItem('settings', JSON.stringify(settings));
+    return null;
   }
 }
