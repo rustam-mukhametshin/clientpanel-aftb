@@ -9,11 +9,12 @@ import {ClientDetailsComponent} from './components/client-details/client-details
 import {SettingsComponent} from './components/settings/settings.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {AuthGuard} from './guards/auth.guard';
+import {RegisterGuard} from './guards/register.guard';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
+  {path: 'register', component: RegisterComponent, canActivate: [RegisterGuard]},
   {path: 'client/add', component: AddClientComponent, canActivate: [AuthGuard]},
   {path: 'client/edit', component: EditClientComponent, canActivate: [AuthGuard]},
   {path: 'client/edit/:id', component: EditClientComponent, canActivate: [AuthGuard]}
@@ -30,7 +31,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   providers: [
-    AuthGuard
+    AuthGuard,
+    RegisterGuard
   ]
 })
 export class AppRoutingModule {
