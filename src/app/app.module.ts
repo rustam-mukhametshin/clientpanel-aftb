@@ -27,6 +27,7 @@ import {NotFoundComponent} from './components/not-found/not-found.component';
 
 import {ClientService} from './services/client.service';
 import {AuthService} from './services/auth.service';
+import {SettingsService} from './services/settings.service';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import {AuthService} from './services/auth.service';
   ],
   providers: [
     ClientService,
-    AuthService
+    AuthService,
+    SettingsService
   ],
   bootstrap: [AppComponent]
 })
